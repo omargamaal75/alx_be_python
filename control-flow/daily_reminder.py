@@ -1,23 +1,27 @@
 task = input("Enter your task: ")
-priority = input("Priority (high/medium/low): ").lower()
-time_bound = input("Is it time-bound? (yes/no): ").lower()
+while True:
+    priority = input("Priority (high/medium/low): ").lower()
+    if priority in ("high", "medium", "low"):
+        break
+    else:
+        print("Please enter a valid priority: high, medium, or low.")
+while True:
+    time_bound = input("Is it time-bound? (yes/no): ").lower()
+    if time_bound in ("yes", "no"):
+        break
+    else:
+        print("Please enter 'yes' or 'no'.")
 match priority:
     case "high":
-        if time_bound == "yes":
-            print(f"\nReminder: '{task}' is a high priority task that requires immediate attention today!")
-        else:
-            print(f"\nReminder: '{task}' is a high priority task. Please address it soon.")
+        message = f"'{task}' is a high priority task"
     case "medium":
-        if time_bound == "yes":
-            print(f"\nReminder: '{task}' is a medium priority task with a deadline. Try to complete it today.")
-        else:
-            print(f"\nReminder: '{task}' is a medium priority task. Schedule time for it this week.")
+        message = f"'{task}' is a medium priority task"
     case "low":
-        if time_bound == "yes":
-            print(f"\nReminder: '{task}' is a low priority task with a time constraint. Complete when possible.")
-        else:
-            print(f"\nNote: '{task}' is a low priority task. Consider completing it when you have free time.")
+        message = f"'{task}' is a low priority task"
     case _:
-        print("\nInvalid priority level entered. Please use high/medium/low.")
-print("\nWell done on completing this project! Let the world hear about this milestone achieved.")
-print("\n🚀 Click here to tweet! 🚀")
+        message = f"'{task}' is a task"
+if time_bound == "yes":
+    message += " that requires immediate attention today!"
+else:
+    message = "Note: " + message + ". Consider completing it when you have free time."
+print(f"Reminder: {message}")
